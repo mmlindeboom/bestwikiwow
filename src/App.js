@@ -94,9 +94,9 @@ function App() {
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
-      <HeaderNavigation style={{background: '#93b874'}}>
+      <HeaderNavigation style={{background: '#7cad67'}}>
         <NavigationList>
-          <NavigationItem><img width="162px" height="42px" src="https://www.wikihow.com/skins/owl/images/wikihow_logo.png"></img></NavigationItem>
+          <NavigationItem><img width="250px" src="/wikiwow_logo.png"></img></NavigationItem>
           <NavigationItem>
             <form ref={formEl}
                 onSubmit={(e) => {
@@ -104,7 +104,7 @@ function App() {
                 getSteps()
               }}>
               <Input
-                placeholder="to do anything..."
+                placeholder="...do everything!"
                 ref={inputEl}
                 onChange={(e) => setQuestion(e.target.value)}
                 endEnhancer={<Search size="18px" onClick={handleSubmit}/>}
