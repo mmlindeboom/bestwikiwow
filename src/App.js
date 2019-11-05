@@ -6,19 +6,18 @@ import { useStyletron } from 'baseui'
 import {ListItem, ListItemLabel} from 'baseui/list';
 import { H5 } from 'baseui/typography'
 import { Input } from 'baseui/input';
-import { Button } from 'baseui/button'
+import Modal from './components/modal'
 import {
   Card,
   StyledBody,
-  StyledAction
 } from "baseui/card";
 import {Search} from 'baseui/icon';
 import {
   HeaderNavigation,
-  ALIGN,
   StyledNavigationItem as NavigationItem,
   StyledNavigationList as NavigationList,
 } from 'baseui/header-navigation';
+
 const engine = new Styletron();
 
 const Centered = styled('div', {
@@ -30,11 +29,11 @@ const Centered = styled('div', {
   margin: "0 auto"
 });
 
-const VideoBg = function({src}) {
+const VideoBg = function({src, setModalOpen}) {
   const [useCSS] = useStyletron()
 
   return (
-    <div className={useCSS({
+    <div onClick={() => setModalOpen(true)} className={useCSS({
       'background-image': "url(https://dzwonsemrish7.cloudfront.net/items/1C1s310E3T013E0k2j3w/Screen%20Recording%202019-11-04%20at%2005.42%20PM.gif)",
       'background-size': 'cover',
       position: 'fixed',
@@ -57,6 +56,7 @@ function App() {
   const [images, setImages] = useState(null)
   const [question, setQuestion] = useState(null)
   const [submitEnabled, enableSubmit] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
   const getSteps = async function(e) {
     const textRes = await fetch('https://hargrimm-wikihow-v1.p.rapidapi.com/steps', {
@@ -109,9 +109,10 @@ function App() {
           </NavigationItem>
         </NavigationList>
       </HeaderNavigation>
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}></Modal>
       <Centered>
         <div>
-          {!steps && <VideoBg src="https://dzwonsemrish7.cloudfront.net/items/2J3f0C2N2N2v001e3a2x/Screen%20Recording%202019-11-04%20at%2005.23%20PM.mov" />}
+          {!steps && <VideoBg src="https://dzwonsemrish7.cloudfront.net/items/2J3f0C2N2N2v001e3a2x/Screen%20Recording%202019-11-04%20at%2005.23%20PM.mov" setModalOpen={setModalOpen}/>}
 
 
           {steps &&<Card
