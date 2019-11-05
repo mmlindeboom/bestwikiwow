@@ -9,9 +9,16 @@ import {
   SIZE,
   ROLE
 } from "baseui/modal";
+import { KIND } from 'baseui/button'
 
 
-export default function({isOpen, setIsOpen}) {
+export default function({isOpen, setIsOpen, searchRef}) {
+  const handleCloseandFocus = function() {
+    setIsOpen(false)
+    debugger
+    searchRef.current.focus()
+  }
+
   return (
 
     <Modal
@@ -28,7 +35,7 @@ export default function({isOpen, setIsOpen}) {
         This site uses an open API that provides sentences from 3 random wikihow articles. This is for technology demonstration purposes, only.
       </ModalBody>
       <ModalFooter>
-        <ModalButton onClick={() => setIsOpen(false)}>Okay</ModalButton>
+        <ModalButton onClick={() => window.location.replace('http://www.google.com')}>Get me out of here</ModalButton>
       </ModalFooter>
     </Modal>
   )

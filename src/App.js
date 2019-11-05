@@ -52,6 +52,7 @@ const VideoBg = function({src, setModalOpen}) {
 function App() {
   const [css, theme] = useStyletron()
   const inputEl = useRef(null)
+  const formEl = useRef(null)
   const [steps, setSteps] = useState(null)
   const [images, setImages] = useState(null)
   const [question, setQuestion] = useState(null)
@@ -86,6 +87,9 @@ function App() {
     }
   }, [question])
 
+  const handleSubmit = () => {
+    formEl.current.dispatchEvent(new Event('submit'))
+  }
 
   return (
     <StyletronProvider value={engine}>
@@ -94,22 +98,23 @@ function App() {
         <NavigationList>
           <NavigationItem><img width="162px" height="42px" src="https://www.wikihow.com/skins/owl/images/wikihow_logo.png"></img></NavigationItem>
           <NavigationItem>
-            <form onSubmit={(e) => {
-              e.preventDefault()
-              getSteps()
-            }}>
+            <form ref={formEl}
+                onSubmit={(e) => {
+                e.preventDefault()
+                getSteps()
+              }}>
               <Input
                 placeholder="to do anything..."
                 ref={inputEl}
                 onChange={(e) => setQuestion(e.target.value)}
-                endEnhancer={<Search size="18px" />}
+                endEnhancer={<Search size="18px" onClick={handleSubmit}/>}
                 clearable />
             </form>
 
           </NavigationItem>
         </NavigationList>
       </HeaderNavigation>
-      <Modal isOpen={modalOpen} setIsOpen={setModalOpen}></Modal>
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} searchRef={() => inputEl}></Modal>
       <Centered>
         <div>
           {!steps && <VideoBg src="https://dzwonsemrish7.cloudfront.net/items/2J3f0C2N2N2v001e3a2x/Screen%20Recording%202019-11-04%20at%2005.23%20PM.mov" setModalOpen={setModalOpen}/>}
