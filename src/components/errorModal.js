@@ -24,12 +24,12 @@ export default function({isOpen, setIsOpen}) {
       size={SIZE.default}
       role={ROLE.dialog}
     >
-      <ModalHeader>THIS SITE IS A JOKE</ModalHeader>
+      <ModalHeader>Error!</ModalHeader>
       <ModalBody>
-        This site uses an open API that provides sentences from 3 random wikihow articles. This is for technology demonstration purposes, only.
+        We've detected intruders.
       </ModalBody>
       <ModalFooter>
-        <ModalButton onClick={() => window.location.replace('http://www.google.com')}>Get me out of here</ModalButton>
+        <ModalButton onClick={() => setIsOpen(false)}>Don't Panic</ModalButton>
       </ModalFooter>
     </Modal>
   )
